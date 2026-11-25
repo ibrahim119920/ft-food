@@ -29,6 +29,7 @@ Dokumen ini berisi rencana pembuatan aplikasi kantin **FT Food**, mulai dari waw
 | [`docs/prd-template.md`](docs/prd-template.md) | Kerangka dokumen kebutuhan produk (PRD) |
 | [`research/README.md`](research/README.md) | Aturan penyimpanan data wawancara dan menjaga privasi responden |
 | [`scripts/setup-github.ps1`](scripts/setup-github.ps1) | Skrip untuk membuat label, milestone, issue, dan project |
+| [`scripts/populate-project.ps1`](scripts/populate-project.ps1) | Skrip untuk mengisi Priority, Area, Size, Sprint, dan tanggal pada project |
 | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE) | Format standar untuk issue riset, fitur, dan bug |
 | [`.github/pull_request_template.md`](.github/pull_request_template.md) | Daftar periksa sebelum mengirim PR |
 
@@ -61,7 +62,11 @@ Dokumen ini berisi rencana pembuatan aplikasi kantin **FT Food**, mulai dari waw
    gh auth refresh -s project
    pwsh -File scripts/setup-github.ps1 -CreateProject -StartDate 2026-12-01
    ```
-5. **Mulai Sprint 0 pada 1 Desember 2026**: kerjakan DISC-01 dan DISC-02, lanjutkan wawancara pada DISC-03, lalu tutup target M0 pada 13 Desember.
+5. **Isi field project otomatis** (ganti `4` dengan nomor project yang muncul di langkah 4):
+   ```powershell
+   pwsh -File scripts/populate-project.ps1 -ProjectNumber 4
+   ```
+6. **Mulai Sprint 0 pada 1 Desember 2026**: kerjakan DISC-01 dan DISC-02, lanjutkan wawancara pada DISC-03, lalu tutup target M0 pada 13 Desember.
 
 ## Keputusan yang perlu disepakati
 

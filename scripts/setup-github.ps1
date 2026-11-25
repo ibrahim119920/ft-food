@@ -267,9 +267,14 @@ $existingMilestones = @{}
 try {
     $msRaw = Invoke-Gh -Arguments @("api", "repos/$Repo/milestones?state=all&per_page=100")
     if (-not [string]::IsNullOrWhiteSpace($msRaw)) {
-        $msList = @($msRaw | ConvertFrom-Json)
+        # Windows PowerShell 5.1 mengembalikan array JSON sebagai satu objek.
+        # Pisahkan lewat variabel agar isinya benar-benar dienumerasi.
+        $msData = $msRaw | ConvertFrom-Json
+        $msList = @($msData)
         foreach ($ms in $msList) {
-            if ($null -ne $ms) { $existingMilestones[$ms.title] = $ms.number }
+            if ($null -ne $ms -and -not [string]::IsNullOrWhiteSpace($ms.title)) {
+                $existingMilestones[$ms.title] = $ms.number
+            }
         }
     }
 }
@@ -408,9 +413,12 @@ try {
         "--json", "number,title,url"
     )
     if (-not [string]::IsNullOrWhiteSpace($issueListRaw)) {
-        $issueList = @($issueListRaw | ConvertFrom-Json)
+        $issueData = $issueListRaw | ConvertFrom-Json
+        $issueList = @($issueData)
         foreach ($item in $issueList) {
-            if ($null -ne $item) { $existingIssues[$item.title] = $item }
+            if ($null -ne $item -and -not [string]::IsNullOrWhiteSpace($item.title)) {
+                $existingIssues[$item.title] = $item
+            }
         }
     }
 }

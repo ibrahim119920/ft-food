@@ -186,16 +186,33 @@ pwsh -File ./scripts/setup-github.ps1 `
 5. Membaca data dari `docs/03-backlog.md`, lalu membuat 35 issue dengan label dan milestone.
 6. Memasukkan issue ke project, kecuali `-SkipProjectItems` dipakai.
 
+**Mengisi field otomatis (disarankan):**
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/populate-project.ps1 -ProjectNumber 4
+```
+
+Skrip ini membaca `docs/03-backlog.md` dan pembagian minggu di `docs/05-execution-plan-2-months.md` §5, lalu mengisi `Priority`, `Area`, `Size`, `Sprint`, `Start date`, dan `Target date` untuk semua issue. Skrip aman dijalankan ulang.
+
 **Yang masih manual:**
 
 - Membuat tampilan papan (§5).
 - Mengubah pilihan **Status** bawaan (`Todo/In Progress/Done`) menjadi `Backlog/Ready/In Progress/In Review/QA/Done`.
-- Mengisi `Priority`, `Area`, `Size`, dan `Sprint` untuk setiap issue. Gunakan edit massal di tampilan Table (§9).
 - Mengaktifkan otomatisasi (§6).
 
 **Menjalankan ulang:** skrip melewati issue dengan judul yang sama dan melewati label, milestone, atau field yang sudah ada. Skrip aman dijalankan kembali setelah gagal di tengah jalan. Skrip tidak memperbarui isi issue lama; ubah issue di GitHub setelah impor.
 
 ## 9. Mengisi kolom setelah impor
+
+**Cara otomatis (disarankan):**
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/populate-project.ps1 -ProjectNumber 4
+```
+
+Skrip mengisi semua kolom untuk 35 issue dan menampilkan jumlah item yang berhasil diperbarui.
+
+**Cara manual:**
 
 1. Buka tampilan **📋 Backlog** (Table).
 2. Tampilkan kolom `Priority`, `Area`, `Size`, dan `Sprint`.
@@ -206,6 +223,7 @@ pwsh -File ./scripts/setup-github.ps1 `
    - 2 → `2 - S`
    - 3 → `3 - M`
    - 5 → `5 - L`
+   - 6 dan 7 → `8 - XL` (dibulatkan)
    - 8 → `8 - XL`
 6. Isi `Sprint` (`Sprint 0` sampai `Sprint 4`) sesuai pembagian issue per minggu di `docs/05-execution-plan-2-months.md` §5.
 7. Isi `Start date` dengan hari Senin minggu tersebut dan `Target date` dengan hari Minggu di akhir minggu.
@@ -214,10 +232,11 @@ pwsh -File ./scripts/setup-github.ps1 `
 
 - [ ] Project sudah terhubung ke repository.
 - [ ] 7 milestone muncul dengan tanggal yang benar.
-- [ ] 21 label muncul (8 type, 8 area, 4 priority, 1 status).
+- [ ] 21 label proyek dibuat (8 type, 8 area, 4 priority, 1 status), di luar label bawaan GitHub.
 - [ ] 35 issue dibuat dengan judul `[KEY] …` dan milestone yang tepat.
 - [ ] Semua issue masuk project.
-- [ ] Status memiliki 6 pilihan; kolom Priority, Area, Size, Sprint, Start date, dan Target date tersedia.
+- [ ] Priority, Area, Size, Sprint, Start date, dan Target date terisi untuk semua issue.
+- [ ] Status memiliki 6 pilihan.
 - [ ] 7 tampilan dibuat dengan filter yang benar.
 - [ ] Otomatisasi aktif dan tim memahami `Closes` vs `Refs`.
 - [ ] Issue `DISC-01` sudah ditugaskan dan berstatus `Ready` untuk memulai Sprint 0.

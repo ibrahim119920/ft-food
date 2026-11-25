@@ -4,7 +4,7 @@ Dokumen ini adalah daftar utama pekerjaan FT Food. Setiap pekerjaan memiliki tuj
 
 **Cara membaca**
 
-- **Perkiraan (estimate):** 1 = XS, 2 = S, 3 = M, 5 = L, 8 = XL. Untuk jadwal 2 bulan, 1 poin ≈ 4 jam (0,5 hari kerja).
+- **Perkiraan (estimate):** 1 = XS, 2 = S, 3 = M, 5 = L, 8 = XL. Untuk jadwal 2 bulan, 1 poin ≈ 4 jam (0,5 hari kerja). Estimasi 6 dan 7 tetap dicatat sebagai poin, tetapi pada field Size GitHub dibulatkan ke XL.
 - **Prioritas:** P0 = menghambat seluruh pekerjaan, P1 = wajib untuk milestone, P2 = sebaiknya, P3 = dikerjakan nanti.
 - **Bergantung pada:** pekerjaan yang harus selesai atau berjalan lebih dulu.
 - **Kriteria selesai:** semua butir harus terbukti sebelum issue dipindahkan ke Done.
