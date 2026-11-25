@@ -1,0 +1,62 @@
+name: 🔍 Riset / Wawancara
+description: Rencana, catatan, atau hasil wawancara, observasi, dan benchmark
+title: "[Riset] "
+labels: ["type/research"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gunakan template ini untuk pekerjaan discovery. Jangan menulis nama asli responden.
+        Simpan transkrip di folder lokal yang tidak di-commit (`research/notes/`).
+
+  - type: textarea
+    id: tujuan
+    attributes:
+      label: Tujuan & pertanyaan riset
+      description: Apa yang ingin diketahui? Hindari pertanyaan yang mengarahkan jawaban.
+      placeholder: "Contoh: Bagaimana Cust memesan dan membayar di kantin saat jam sibuk?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: metode
+    attributes:
+      label: Metode & responden
+      description: Metode, jumlah, kriteria, dan cara rekrutmen.
+      placeholder: "Wawancara semi-terstruktur, 5 tenant aktif, 30 menit, rekrutmen via pengelola."
+    validations:
+      required: true
+
+  - type: textarea
+    id: temuan
+    attributes:
+      label: Temuan utama
+      description: Kutipan/observasi yang mendukung, bukan opini tim.
+      render: markdown
+
+  - type: textarea
+    id: implikasi
+    attributes:
+      label: Implikasi ke produk
+      description: Perubahan PRD/backlog/desain yang diperlukan.
+      render: markdown
+
+  - type: checkboxes
+    id: output
+    attributes:
+      label: Hasil
+      options:
+        - label: Catatan/transkrip tanpa nama tersimpan
+        - label: Persetujuan peserta terdokumentasi
+        - label: Temuan sudah dipetakan ke PRD atau daftar pekerjaan
+        - label: Tidak ada data pribadi di issue ini
+
+  - type: dropdown
+    id: prioritas
+    attributes:
+      label: Prioritas
+      options:
+        - P1 - High
+        - P2 - Medium
+        - P3 - Low
+      default: 1

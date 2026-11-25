@@ -1,0 +1,80 @@
+name: ✨ Fitur
+description: Fitur atau pekerjaan teknis dengan kriteria selesai yang dapat diuji
+title: "[Fitur] "
+labels: ["type/feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Satu issue = satu hasil yang bisa didemo. Jika pekerjaan lebih dari ~5 hari,
+        pecah menjadi beberapa issue dan tautkan dependency-nya.
+
+  - type: textarea
+    id: konteks
+    attributes:
+      label: Latar belakang dan kebutuhan pengguna
+      description: Siapa penggunanya, masalah apa yang diselesaikan, dan mengapa perlu dikerjakan sekarang.
+      placeholder: "Sebagai Cust, saya ingin ... supaya ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Kriteria selesai
+      description: Tulis sebagai daftar yang dapat dibuktikan QA.
+      value: |
+        - [ ] 
+        - [ ] 
+        - [ ] 
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Di luar ruang lingkup
+      description: Hal yang sengaja tidak dikerjakan pada issue ini.
+      placeholder: "Tidak termasuk: notifikasi push, refund otomatis."
+
+  - type: input
+    id: design
+    attributes:
+      label: Tautan desain atau kontrak API
+      placeholder: "Figma, OpenAPI, atau ADR"
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Ketergantungan dan risiko
+      description: Issue lain, akses, data, atau keputusan yang dibutuhkan.
+      placeholder: "Bergantung pada #12; butuh akun sandbox QRIS."
+
+  - type: textarea
+    id: test_plan
+    attributes:
+      label: Rencana pengujian
+      description: Pengujian unit, integration, E2E, UAT, dan skenario gagal yang harus diuji.
+      render: markdown
+
+  - type: dropdown
+    id: prioritas
+    attributes:
+      label: Prioritas
+      options:
+        - P0 - Critical
+        - P1 - High
+        - P2 - Medium
+        - P3 - Low
+      default: 1
+
+  - type: checkboxes
+    id: dor
+    attributes:
+      label: Syarat siap dikerjakan
+      options:
+        - label: Kriteria selesai dapat diuji
+        - label: Desain atau kontrak API sudah tertaut
+        - label: Sudah diperkirakan dan masuk milestone
+        - label: Tidak ada pertanyaan yang menghambat

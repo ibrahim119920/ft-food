@@ -1,0 +1,73 @@
+name: 🐞 Bug
+description: Laporkan masalah dengan langkah untuk mengulang dan bukti
+title: "[Bug] "
+labels: ["type/bug"]
+body:
+  - type: textarea
+    id: deskripsi
+    attributes:
+      label: Deskripsi
+      description: Apa yang salah dan dampaknya ke Cust/Tenant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: langkah
+    attributes:
+      label: Langkah untuk mengulang masalah
+      description: Tulis langkah yang dapat diikuti orang lain.
+      placeholder: |
+        1. Login sebagai Cust
+        2. Buka tenant X
+        3. Tambahkan menu Y
+        4. Checkout
+        5. ...
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: harapan
+    attributes:
+      label: Hasil yang diharapkan dan yang terjadi
+      placeholder: |
+        Diharapkan: invoice tampil setelah pembayaran berhasil.
+        Yang terjadi: halaman tetap di QRIS dan status tidak berubah.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Lingkungan pengujian
+      placeholder: "Staging, Chrome Android, pesanan #123, commit abc123"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Tingkat masalah
+      options:
+        - P0 - Critical (data/pembayaran rusak, semua user terblokir)
+        - P1 - High (alur utama gagal)
+        - P2 - Medium (mengganggu, ada workaround)
+        - P3 - Low (kosmetik)
+      default: 1
+    validations:
+      required: true
+
+  - type: textarea
+    id: bukti
+    attributes:
+      label: Bukti
+      description: Screenshot, video, log request id, atau tautan.
+      render: markdown
+
+  - type: checkboxes
+    id: keamanan
+    attributes:
+      label: Pemeriksaan
+      options:
+        - label: Tidak memuat password, token, atau data pembayaran sensitif
+        - label: Sudah dicek apakah bug sama sudah dilaporkan
