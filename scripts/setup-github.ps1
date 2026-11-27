@@ -364,6 +364,11 @@ if ($ProjectNumber -gt 0) {
         [pscustomobject]@{ Name = "Area";        Type = "SINGLE_SELECT"; Options = "Discovery,Design,Cust,Tenant,Payment,Platform,QA,Ops" },
         [pscustomobject]@{ Name = "Size";        Type = "SINGLE_SELECT"; Options = "1 - XS,2 - S,3 - M,5 - L,8 - XL" },
         [pscustomobject]@{ Name = "Sprint";      Type = "SINGLE_SELECT"; Options = "Sprint 0,Sprint 1,Sprint 2,Sprint 3,Sprint 4" },
+        [pscustomobject]@{ Name = "Item type";   Type = "SINGLE_SELECT"; Options = "Delivery,Checkpoint,Risk" },
+        [pscustomobject]@{ Name = "Checkpoint";  Type = "SINGLE_SELECT"; Options = "G0,G1,G2,G3,G4,G5,G6,G7,G8" },
+        [pscustomobject]@{ Name = "Gate result"; Type = "SINGLE_SELECT"; Options = "Pending,Passed,Failed,Deferred" },
+        [pscustomobject]@{ Name = "Risk level";  Type = "SINGLE_SELECT"; Options = "Critical,High,Medium,Low" },
+        [pscustomobject]@{ Name = "Risk status"; Type = "SINGLE_SELECT"; Options = "Open,Monitoring,Mitigated,Accepted" },
         [pscustomobject]@{ Name = "Start date";  Type = "DATE";          Options = $null },
         [pscustomobject]@{ Name = "Target date"; Type = "DATE";          Options = $null }
     )

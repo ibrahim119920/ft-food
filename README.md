@@ -6,6 +6,7 @@ Dokumen ini berisi rencana pembuatan aplikasi kantin **FT Food**, mulai dari waw
 
 - 2 peran: **Cust** (pembeli) dan **Tenant** (penjual)
 - 35 pekerjaan (issue)
+- 9 checkpoint dan 10 risiko (item project)
 - 7 target antara (milestone)
 - 5 sprint selama 9 minggu
 - Periode: **1 Desember 2026 – 31 Januari 2027**
@@ -30,6 +31,7 @@ Dokumen ini berisi rencana pembuatan aplikasi kantin **FT Food**, mulai dari waw
 | [`research/README.md`](research/README.md) | Aturan penyimpanan data wawancara dan menjaga privasi responden |
 | [`scripts/setup-github.ps1`](scripts/setup-github.ps1) | Skrip untuk membuat label, milestone, issue, dan project |
 | [`scripts/populate-project.ps1`](scripts/populate-project.ps1) | Skrip untuk mengisi Priority, Area, Size, Sprint, dan tanggal pada project |
+| [`scripts/add-checkpoints-risks.ps1`](scripts/add-checkpoints-risks.ps1) | Skrip untuk menambahkan checkpoint, risiko, dan tampilan khusus |
 | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE) | Format standar untuk issue riset, fitur, dan bug |
 | [`.github/pull_request_template.md`](.github/pull_request_template.md) | Daftar periksa sebelum mengirim PR |
 
@@ -66,7 +68,11 @@ Dokumen ini berisi rencana pembuatan aplikasi kantin **FT Food**, mulai dari waw
    ```powershell
    pwsh -File scripts/populate-project.ps1 -ProjectNumber 4
    ```
-6. **Mulai Sprint 0 pada 1 Desember 2026**: kerjakan DISC-01 dan DISC-02, lanjutkan wawancara pada DISC-03, lalu tutup target M0 pada 13 Desember.
+6. **Tambahkan checkpoint dan risiko**:
+   ```powershell
+   pwsh -File scripts/add-checkpoints-risks.ps1 -ProjectNumber 4
+   ```
+7. **Mulai Sprint 0 pada 1 Desember 2026**: kerjakan DISC-01 dan DISC-02, lanjutkan wawancara pada DISC-03, lalu tutup target M0 pada 13 Desember.
 
 ## Keputusan yang perlu disepakati
 

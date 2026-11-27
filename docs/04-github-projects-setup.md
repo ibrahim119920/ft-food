@@ -1,6 +1,6 @@
 # 04 — Panduan Membuat GitHub Projects
 
-Panduan ini menjelaskan cara membuat papan **FT Food — Development**. Ada dua cara: memakai skrip (label, milestone, issue, dan project) atau membuat sendiri lewat tampilan GitHub. Tampilan papan (views) tetap dibuat manual karena GitHub belum menyediakan API yang stabil untuk itu.
+Panduan ini menjelaskan cara membuat papan **FT Food — Development**. Ada dua cara: memakai skrip (label, milestone, issue, project, checkpoint, risiko, dan lima tampilan dasar) atau membuat sendiri lewat tampilan GitHub. Tampilan kerja tambahan dibuat manual.
 
 ## 0. Yang perlu disiapkan
 
@@ -44,8 +44,15 @@ Buat di **Settings → Custom fields**. Urutan pilihan menentukan urutan saat di
 | **Area** | Single select | `Discovery`, `Design`, `Cust`, `Tenant`, `Payment`, `Platform`, `QA`, `Ops` |
 | **Size** | Single select | `1 - XS`, `2 - S`, `3 - M`, `5 - L`, `8 - XL` |
 | **Sprint** | Single select | `Sprint 0` sampai `Sprint 4` |
+| **Item type** | Single select | `Delivery`, `Checkpoint`, `Risk` |
+| **Checkpoint** | Single select | `G0` sampai `G8` |
+| **Gate result** | Single select | `Pending`, `Passed`, `Failed`, `Deferred` |
+| **Risk level** | Single select | `Critical`, `High`, `Medium`, `Low` |
+| **Risk status** | Single select | `Open`, `Monitoring`, `Mitigated`, `Accepted` |
 | **Start date** | Date | Diisi saat item masuk sprint |
-| **Target date** | Date | Samakan dengan tanggal milestone |
+| **Target date** | Date | Samakan dengan tanggal milestone atau tanggal checkpoint/risiko |
+
+**Item type** membedakan tiga jenis item: pekerjaan (`Delivery`), titik pemeriksaan (`Checkpoint`), dan risiko (`Risk`). Checkpoint dan Risks dibuat sebagai **draft item** di project, bukan issue repository, agar jumlah 35 issue tetap sesuai backlog. Judulnya memakai awalan `[CP]` dan `[RISK-xx]`.
 
 **Warna Status yang disarankan:** Backlog abu-abu, Ready biru, In Progress kuning, In Review ungu, QA oranye, Done hijau.
 
@@ -101,17 +108,26 @@ Skrip menghitung tanggal dari `-StartDate` (default `2026-12-01`). Jika jadwal k
 
 ## 5. Tampilan papan (views)
 
-Buat lewat **+ New view** di project. Langkah ini manual dan memerlukan sekitar 5 menit.
+Skrip `add-checkpoints-risks.ps1` membuat dan menyetel lima tampilan dasar:
+
+| Nama tampilan | Jenis | Filter | Isi |
+| :--- | :--- | :--- | :--- |
+| **Issues** | Table | `item-type:Delivery` | 35 issue pekerjaan |
+| **Timeline** | Roadmap | `item-type:Delivery` | Urutan pekerjaan berdasarkan tanggal |
+| **Sprints** | Roadmap | `item-type:Delivery` | Sebaran pekerjaan per sprint |
+| **Checkpoints** | Table | `item-type:Checkpoint` | 9 checkpoint G0–G8 |
+| **Risks** | Table | `item-type:Risk` | 10 risiko proyek |
+
+Tampilan kerja tambahan dibuat manual lewat **+ New view**:
 
 | Nama tampilan | Jenis | Filter | Pengelompokan / urutan | Kegunaan |
 | :--- | :--- | :--- | :--- | :--- |
-| **🗺 Roadmap** | Roadmap | `is:open` | Kelompok: Milestone; tanggal: Target date | Melihat urutan tahap |
-| **🏃 Sprint Board** | Board | `sprint:"Sprint 3"` (ganti setiap sprint) | Kolom: Status; urut Priority | Pekerjaan harian sprint |
-| **📋 Backlog** | Table | `status:Backlog,Ready` | Kelompok: Area; urut Priority lalu Size | Perencanaan |
-| **🛒 Cust Flow** | Board | `area:Cust,Payment` | Kolom: Status; urut Milestone | Memantau alur Cust |
-| **🏪 Tenant Ops** | Table | `area:Tenant` | Kelompok: Status; urut Priority | Pekerjaan Tenant |
-| **🐞 Bugs & Blocked** | Table | `label:type/bug,status/blocked` | Urut Priority | Menangani bug dan hambatan |
-| **🚦 QA & Release** | Table | `area:QA,Ops` | Kelompok: Milestone; urut Status | Persiapan rilis |
+| **🏃 Sprint Board** | Board | `item-type:Delivery sprint:"Sprint 3"` (ganti setiap sprint) | Kolom: Status; urut Priority | Pekerjaan harian sprint |
+| **📋 Backlog** | Table | `item-type:Delivery status:Backlog,Ready` | Kelompok: Area; urut Priority lalu Size | Perencanaan |
+| **🛒 Cust Flow** | Board | `item-type:Delivery area:Cust,Payment` | Kolom: Status; urut Milestone | Memantau alur Cust |
+| **🏪 Tenant Ops** | Table | `item-type:Delivery area:Tenant` | Kelompok: Status; urut Priority | Pekerjaan Tenant |
+| **🐞 Bugs & Blocked** | Table | `item-type:Delivery label:type/bug,status/blocked` | Urut Priority | Menangani bug dan hambatan |
+| **🚦 QA & Release** | Table | `item-type:Delivery area:QA,Ops` | Kelompok: Milestone; urut Status | Persiapan rilis |
 
 **Tips filter:**
 
@@ -194,9 +210,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/populate-project.p
 
 Skrip ini membaca `docs/03-backlog.md` dan pembagian minggu di `docs/05-execution-plan-2-months.md` §5, lalu mengisi `Priority`, `Area`, `Size`, `Sprint`, `Start date`, dan `Target date` untuk semua issue. Skrip aman dijalankan ulang.
 
+**Menambahkan Checkpoint dan Risks:**
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/add-checkpoints-risks.ps1 -ProjectNumber 4
+```
+
+Skrip membuat field `Item type`, `Checkpoint`, `Gate result`, `Risk level`, dan `Risk status`; menambahkan 9 checkpoint dan 10 risiko sebagai draft item; menandai 35 issue sebagai `Delivery`; serta menyetel tampilan `Issues`, `Timeline`, `Sprints`, `Checkpoints`, dan `Risks`. Skrip aman dijalankan ulang.
+
 **Yang masih manual:**
 
-- Membuat tampilan papan (§5).
+- Menambah tampilan kerja lain di §5 (lima tampilan dasar sudah dibuat).
 - Mengubah pilihan **Status** bawaan (`Todo/In Progress/Done`) menjadi `Backlog/Ready/In Progress/In Review/QA/Done`.
 - Mengaktifkan otomatisasi (§6).
 
@@ -236,8 +260,10 @@ Skrip mengisi semua kolom untuk 35 issue dan menampilkan jumlah item yang berhas
 - [ ] 35 issue dibuat dengan judul `[KEY] …` dan milestone yang tepat.
 - [ ] Semua issue masuk project.
 - [ ] Priority, Area, Size, Sprint, Start date, dan Target date terisi untuk semua issue.
+- [ ] 9 checkpoint dan 10 risiko masuk project sebagai draft item.
+- [ ] Item type terisi: 35 `Delivery`, 9 `Checkpoint`, 10 `Risk`.
 - [ ] Status memiliki 6 pilihan.
-- [ ] 7 tampilan dibuat dengan filter yang benar.
+- [ ] Lima tampilan dasar (Issues, Timeline, Sprints, Checkpoints, Risks) ada dan filternya benar.
 - [ ] Otomatisasi aktif dan tim memahami `Closes` vs `Refs`.
 - [ ] Issue `DISC-01` sudah ditugaskan dan berstatus `Ready` untuk memulai Sprint 0.
 
@@ -254,4 +280,6 @@ Skrip mengisi semua kolom untuk 35 issue dan menampilkan jumlah item yang berhas
 | Isi issue berantakan atau emoji hilang | Pastikan file backlog dibaca sebagai UTF-8. Gunakan PowerShell 7. |
 | `gh project item-add` lambat | Normal untuk 35 item karena satu panggilan per issue. |
 | Judul issue dobel | Periksa judul yang sama persis. Skrip melewati judul yang sudah ada. |
+| Checkpoint atau Risks tidak muncul di tampilan Issues | Memang dipisahkan. Buka tampilan `Checkpoints` atau `Risks`, atau ubah filter menjadi `item-type:Checkpoint` / `item-type:Risk`. |
+| Tampilan Checkpoints kosong | Pastikan field `Item type` berisi `Checkpoint`, bukan nama lain. Filter yang benar: `item-type:Checkpoint`. |
 | Status masih Todo/In Progress/Done | Ubah pilihan Status di pengaturan project. API tidak selalu dapat mengubahnya. |
