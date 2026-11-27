@@ -1,8 +1,8 @@
+Untuk melihat daftar milestone, sprint, issue, dan lain-lain, buka [GitHub Projects FT Food](https://github.com/users/ibrahim119920/projects/4).
+
 # FT Food
 
 FT Food adalah aplikasi pemesanan kantin untuk **Cust** (pemesan) dan **Tenant** (penjual). Periode pengerjaan **1 Desember 2026 – 31 Januari 2027** (9 minggu, 5 sprint) dengan **35 issue dan 197 poin**.
-
-Untuk melihat daftar milestone, buka [GitHub Projects FT Food — Development](https://github.com/users/ibrahim119920/projects/4).
 
 ## Navigasi project
 
