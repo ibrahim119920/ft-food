@@ -1,5 +1,13 @@
 Untuk melihat daftar milestone, sprint, issue, dan lain-lain, buka [GitHub Projects FT Food](https://github.com/users/ibrahim119920/projects/4).
 
+Anggota: 
+- Muhammad Afiq Mirza Choiruzan
+- Ahmad Maulana Ibrahim (24/539655/TK/59853)
+- Bagas Adjie Pamungkas
+
+Link file presentasi: [Google Slideshow](https://docs.google.com/presentation/d/e/2PACX-1vTZfFrLjStEKaiuzIuFdYMF9zR3YIkYRH6DouFyRr_k0_2bDIDBdChNDLtfIg8MsN2C8q6ipa8T2Idq/pub?start=false&loop=false&delayms=60000)
+
+
 # FT Food
 
 FT Food adalah aplikasi pemesanan kantin untuk **Cust** (pemesan) dan **Tenant** (penjual). Periode pengerjaan **1 Desember 2026 – 31 Januari 2027** (9 minggu, 5 sprint) dengan **35 issue dan 197 poin**.
