@@ -1,139 +1,80 @@
-# FT Food — Rencana Proyek dan GitHub Projects
+# FT Food
 
-Dokumen ini berisi rencana pembuatan aplikasi kantin **FT Food**, mulai dari wawancara sampai peluncuran. Rencana disusun agar dapat langsung dijalankan sebagai GitHub Projects.
+FT Food adalah aplikasi pemesanan kantin untuk **Cust** (pemesan) dan **Tenant** (penjual). Periode pengerjaan **1 Desember 2026 – 31 Januari 2027** (9 minggu, 5 sprint) dengan **35 issue dan 197 poin**.
 
-**Ringkasan:**
+Untuk melihat daftar milestone, buka [GitHub Projects FT Food — Development](https://github.com/users/ibrahim119920/projects/4).
 
-- 2 peran: **Cust** (pembeli) dan **Tenant** (penjual)
-- 35 pekerjaan (issue)
-- 9 checkpoint dan 10 risiko (item project)
-- 7 target antara (milestone)
-- 5 sprint selama 9 minggu
-- Periode: **1 Desember 2026 – 31 Januari 2027**
+## Navigasi project
 
-## Gambaran aplikasi
+| Bagian | Tautan | Isi |
+| :--- | :--- | :--- |
+| **Milestones** | [Lihat milestone](https://github.com/users/ibrahim119920/projects/4/views/2) | 7 target antara dan tanggalnya |
+| **Sprints** | [Lihat sprint](https://github.com/users/ibrahim119920/projects/4/views/3) | Sprint 0–4 |
+| **Checkpoints** | [Lihat checkpoint](https://github.com/users/ibrahim119920/projects/4/views/4) | 9 titik pemeriksaan G0–G8 |
+| **Issues** | [Lihat issue](https://github.com/users/ibrahim119920/projects/4/views/1) | 35 pekerjaan |
+| **Risks** | [Lihat risiko](https://github.com/users/ibrahim119920/projects/4/views/5) | 10 risiko proyek |
 
-| Peran | Alur utama |
-| :--- | :--- |
-| **Cust** | Melihat daftar tenant → membuka detail tenant → memasukkan menu ke keranjang → checkout → membayar dengan QRIS → menerima invoice → melihat riwayat pesanan |
-| **Tenant** | Melihat antrean pesanan → mengelola produk → melihat laporan omzet dan pencairan |
+## Checkpoint G0–G8
 
-## Daftar dokumen
+| Checkpoint | Tanggal | Syarat lulus |
+| :---: | :--- | :--- |
+| **G0** | 2026-12-13 | PRD awal disetujui; 15 Cust, 5 Tenant, dan 1 pengelola sudah diwawancarai. |
+| **G1** | 2026-12-20 | ERD, OpenAPI, ADR, desain final, dan QRIS sandbox siap. |
+| **G2** | 2026-12-27 | Login, daftar tenant, detail tenant, dan keranjang berjalan di staging. |
+| **G3** | 2027-01-03 | Pembayaran sandbox berhasil sampai invoice tampil dan webhook terverifikasi. |
+| **G4** | 2027-01-10 | Riwayat Cust, antrean Tenant, dan produk berjalan. |
+| **G5** | 2027-01-17 | Laporan, E2E, keamanan, dan staging lulus; build kandidat rilis siap. |
+| **G6** | 2027-01-22 | UAT selesai dan disetujui; tidak ada bug P0/P1. |
+| **G7** | 2027-01-24 | Produksi berjalan; QRIS live berhasil. |
+| **G8** | 2027-01-31 | Pilot selesai; serah terima dan retrospektif selesai. |
+
+## Cara kerja
+
+### Alur status
+
+`Backlog → Ready → In Progress → In Review (PR) → QA → Done`
+
+Issue fitur memakai `Refs #` di PR, bukan `Closes #`. Bug yang ditemukan saat QA dibuat sebagai issue baru dengan label `type/bug`.
+
+### Definition of Ready
+
+- Tujuan dan manfaatnya jelas bagi Cust atau Tenant.
+- Kriteria penerimaan dapat diuji, minimal 3 butir.
+- Desain atau kontrak API sudah ditautkan.
+- Kebutuhan data, akses, dan lingkungan diketahui.
+- Sudah diperkirakan (1/2/3/5/8) dan masuk milestone.
+- Tidak ada pertanyaan yang menghambat.
+- Pekerjaan cukup kecil untuk satu sprint.
+
+### Definition of Done
+
+- Semua kriteria penerimaan terbukti.
+- Review kode selesai dan CI lulus.
+- Pengujian ditambahkan dan E2E diperbarui.
+- Sudah dijalankan di staging dan diperiksa QA.
+- Tidak ada bug P0/P1 terbuka.
+- Dokumentasi, OpenAPI, dan `.env.example` diperbarui bila berubah.
+- Product owner atau QA menyetujui.
+- Issue ditutup setelah QA lulus.
+
+### Prioritas dan bug P0–P3
+
+| Prioritas | Arti | Tindakan |
+| :---: | :--- | :--- |
+| **P0** | Pembayaran/pesanan rusak, data bocor, semua pengguna terhambat | Hentikan sprint, perbaiki dalam 24 jam |
+| **P1** | Alur utama gagal, hanya ada solusi sementara | Perbaiki sebelum rilis |
+| **P2** | Mengganggu tetapi tidak menghambat | Sprint berikutnya |
+| **P3** | Kosmetik atau ide | Masukkan daftar berikutnya |
+
+### Finalisasi fitur
+
+Tidak ada fitur baru setelah **16 Januari 2027**. Hanya bug P0/P1 yang diperbaiki. PR harus kecil dan direview dalam 24 jam. Setiap gate yang gagal dicatat sebagai risiko dan keputusan, bukan dibiarkan.
+
+## Dokumen pendukung
 
 | Dokumen | Isi |
 | :--- | :--- |
-| [`docs/01-discovery-plan.md`](docs/01-discovery-plan.md) | Panduan wawancara, observasi, dan cara menyusun hasil riset |
-| [`docs/02-roadmap.md`](docs/02-roadmap.md) | Aturan kerja tim, peran, jadwal sprint, dan daftar risiko |
-| [`docs/03-backlog.md`](docs/03-backlog.md) | 35 pekerjaan lengkap dengan target, batas waktu, dan kriteria selesai |
-| [`docs/04-github-projects-setup.md`](docs/04-github-projects-setup.md) | Cara membuat papan GitHub, kolom, label, dan otomatisasi |
-| [`docs/05-execution-plan-2-months.md`](docs/05-execution-plan-2-months.md) | **Jadwal rinci 2 bulan**: rencana harian, target antara, dan batas pengurangan fitur |
-| [`docs/prd-template.md`](docs/prd-template.md) | Kerangka dokumen kebutuhan produk (PRD) |
-| [`research/README.md`](research/README.md) | Aturan penyimpanan data wawancara dan menjaga privasi responden |
-| [`scripts/setup-github.ps1`](scripts/setup-github.ps1) | Skrip untuk membuat label, milestone, issue, dan project |
-| [`scripts/populate-project.ps1`](scripts/populate-project.ps1) | Skrip untuk mengisi Priority, Area, Size, Sprint, dan tanggal pada project |
-| [`scripts/add-checkpoints-risks.ps1`](scripts/add-checkpoints-risks.ps1) | Skrip untuk menambahkan checkpoint, risiko, dan tampilan khusus |
-| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE) | Format standar untuk issue riset, fitur, dan bug |
-| [`.github/pull_request_template.md`](.github/pull_request_template.md) | Daftar periksa sebelum mengirim PR |
-
-## Jadwal singkat
-
-| Sprint | Tanggal | Fokus | Poin |
-| :--- | :--- | :--- | ---: |
-| Sprint 0 | 1–6 Desember 2026 | Rapat pembuka, menyiapkan wawancara, mulai observasi | 5 |
-| Sprint 1 | 7–20 Desember 2026 | Menyelesaikan wawancara, PRD, desain, dan fondasi teknis | 61 |
-| Sprint 2 | 21 Desember 2026–3 Januari 2027 | Login, katalog, keranjang, checkout, QRIS | 58 |
-| Sprint 3 | 4–17 Januari 2027 | Riwayat, fitur tenant, laporan, pengujian, staging | 50 |
-| Sprint 4 | 18–31 Januari 2027 | UAT, peluncuran, pelatihan, dan pilot | 23 |
-| | | **Total** | **197** |
-
-> Rencana ini membutuhkan sekitar **20 jam per orang per minggu** untuk 5 orang. Rincian harian dan cara mengurangi ruang lingkup ada di [`docs/05-execution-plan-2-months.md`](docs/05-execution-plan-2-months.md).
-
-## Cara memulai
-
-1. **Baca rencana wawancara** di `docs/01-discovery-plan.md`. Jangan mulai membuat fitur sebelum PRD disetujui.
-2. **Siapkan repository GitHub** jika belum ada:
-   ```powershell
-   git init
-   git add .
-   git commit -m "chore: initial project plan"
-   gh repo create ft-food --private --source=. --push
-   ```
-3. **Buat GitHub Project** mengikuti `docs/04-github-projects-setup.md`.
-4. **Jalankan skrip penyiapan**:
-   ```powershell
-   gh auth refresh -s project
-   pwsh -File scripts/setup-github.ps1 -CreateProject -StartDate 2026-12-01
-   ```
-5. **Isi field project otomatis** (ganti `4` dengan nomor project yang muncul di langkah 4):
-   ```powershell
-   pwsh -File scripts/populate-project.ps1 -ProjectNumber 4
-   ```
-6. **Tambahkan checkpoint dan risiko**:
-   ```powershell
-   pwsh -File scripts/add-checkpoints-risks.ps1 -ProjectNumber 4
-   ```
-7. **Mulai Sprint 0 pada 1 Desember 2026**: kerjakan DISC-01 dan DISC-02, lanjutkan wawancara pada DISC-03, lalu tutup target M0 pada 13 Desember.
-
-## Keputusan yang perlu disepakati
-
-Keputusan berikut masih berupa asumsi. Tim perlu memastikannya saat wawancara:
-
-- Satu pesanan hanya berasal dari **satu tenant**.
-- Pembeli perlu **membuat akun** agar riwayat pesanan tersimpan.
-- Tenant mengelola produknya sendiri karena tidak ada peran admin.
-- Status pesanan: `MENUNGGU_PEMBAYARAN → DIBAYAR → DIPROSES → SELESAI`, ditambah `KEDALUWARSA` dan `GAGAL`.
-- Pencairan dana dicatat secara manual di buku besar internal, belum otomatis.
-- Biaya QRIS tidak ditambahkan sebagai biaya baru ke pembeli, kecuali disepakati lain.
-- Satu akun hanya memiliki satu peran pada versi pertama.
-
-Penjelasan dan cara memvalidasinya ada di [`docs/01-discovery-plan.md` §11](docs/01-discovery-plan.md#11-pertanyaan-yang-wajib-diputuskan).
-
-## Di luar ruang lingkup
-
-Fitur berikut tidak dikerjakan pada versi pertama, kecuali disetujui melalui perubahan resmi:
-
-- Keranjang dan checkout lintas tenant
-- Pengantaran, reservasi meja, dan pesan-antar
-- Promo, voucher, poin, dan ulasan
-- Chat, notifikasi push, dan WhatsApp gateway
-- Refund otomatis dan pembatalan sepihak
-- Akun dengan dua peran dan halaman admin
-- Aplikasi mobile native
-- Pencairan otomatis melalui API disbursement
-- Dasbor analitik lanjutan dan mode offline
-
-## Teknologi awal
-
-Pilihan akhir ditetapkan pada **DES-05 (ADR)**. Tabel ini hanya menjadi titik awal agar tim tidak tertahan:
-
-| Bagian | Pilihan awal | Alternatif |
-| :--- | :--- | :--- |
-| Web | Next.js + TypeScript + Tailwind + shadcn/ui | Laravel + Blade/Livewire, Vue/Nuxt |
-| Database | PostgreSQL + Prisma | MySQL + Prisma, Supabase |
-| Login | Auth.js (email/HP + kata sandi) | Supabase Auth, Laravel Breeze |
-| QRIS | Midtrans | Xendit |
-| Penyimpanan file | S3-compatible (Supabase Storage/R2) | Penyimpanan lokal saat pengembangan |
-| Peluncuran | Vercel + Neon/Supabase | VPS + Docker + Caddy |
-| Pengujian | Vitest + Playwright | Jest + Cypress |
-
-## Istilah yang dipakai
-
-| Istilah | Arti dalam dokumen ini |
-| :--- | :--- |
-| **Issue** | Satu pekerjaan yang dicatat di GitHub |
-| **Milestone** | Target antara, misalnya desain selesai atau pembayaran berfungsi |
-| **Sprint** | Blok kerja selama 1–2 minggu |
-| **PRD** | Dokumen kebutuhan produk |
-| **MVP** | Versi pertama yang layak dipakai dan diuji |
-| **Staging** | Lingkungan uji sebelum aplikasi dipakai pengguna |
-| **UAT** | Pengujian oleh pengguna sebelum rilis |
-| **QRIS** | Pembayaran menggunakan kode QR standar Indonesia |
-| **Webhook** | Pemberitahuan otomatis dari penyedia pembayaran ke aplikasi |
-
-## Status
-
-- Versi rencana: **1.1**
-- Tanggal: 25 November 2026
-- Periode pelaksanaan: **1 Desember 2026 – 31 Januari 2027**
-- Sudah dibuat: dokumen, daftar pekerjaan, jadwal 2 bulan, template, dan skrip penyiapan
-- Belum dibuat di GitHub: repository, GitHub Project, label, milestone, dan issue
+| [`docs/01-discovery-plan.md`](docs/01-discovery-plan.md) | Panduan wawancara, observasi, dan sintesis riset |
+| [`docs/03-backlog.md`](docs/03-backlog.md) | 35 issue, 197 poin, dan kriteria selesai |
+| [`docs/04-github-projects-setup.md`](docs/04-github-projects-setup.md) | Cara membuat papan, field, label, dan otomatisasi |
+| [`docs/05-execution-plan-2-months.md`](docs/05-execution-plan-2-months.md) | Jadwal harian, checkpoint, dan pengurangan ruang lingkup |

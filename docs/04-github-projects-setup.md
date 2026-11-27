@@ -108,13 +108,13 @@ Skrip menghitung tanggal dari `-StartDate` (default `2026-12-01`). Jika jadwal k
 
 ## 5. Tampilan papan (views)
 
-Skrip `add-checkpoints-risks.ps1` membuat dan menyetel lima tampilan dasar:
+Skrip `add-checkpoints-risks.ps1` memastikan lima tampilan dasar tersedia. Filter `Issues`, `Checkpoints`, dan `Risks` diatur otomatis; filter `Milestones` dan `Sprints` tidak diubah agar bisa disesuaikan tim.
 
 | Nama tampilan | Jenis | Filter | Isi |
 | :--- | :--- | :--- | :--- |
 | **Issues** | Table | `item-type:Delivery` | 35 issue pekerjaan |
-| **Timeline** | Roadmap | `item-type:Delivery` | Urutan pekerjaan berdasarkan tanggal |
-| **Sprints** | Roadmap | `item-type:Delivery` | Sebaran pekerjaan per sprint |
+| **Milestones** | Roadmap | Tanpa filter | Semua item berdasarkan tanggal target; gunakan pengelompokan milestone |
+| **Sprints** | Roadmap | Tanpa filter | Semua item; gunakan pengelompokan sprint |
 | **Checkpoints** | Table | `item-type:Checkpoint` | 9 checkpoint G0–G8 |
 | **Risks** | Table | `item-type:Risk` | 10 risiko proyek |
 
@@ -216,7 +216,7 @@ Skrip ini membaca `docs/03-backlog.md` dan pembagian minggu di `docs/05-executio
 powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/add-checkpoints-risks.ps1 -ProjectNumber 4
 ```
 
-Skrip membuat field `Item type`, `Checkpoint`, `Gate result`, `Risk level`, dan `Risk status`; menambahkan 9 checkpoint dan 10 risiko sebagai draft item; menandai 35 issue sebagai `Delivery`; serta menyetel tampilan `Issues`, `Timeline`, `Sprints`, `Checkpoints`, dan `Risks`. Skrip aman dijalankan ulang.
+Skrip membuat field `Item type`, `Checkpoint`, `Gate result`, `Risk level`, dan `Risk status`; menambahkan 9 checkpoint dan 10 risiko sebagai draft item; menandai 35 issue sebagai `Delivery`; serta menyetel tampilan `Issues`, `Milestones`, `Sprints`, `Checkpoints`, dan `Risks`. Skrip aman dijalankan ulang.
 
 **Yang masih manual:**
 
@@ -263,7 +263,7 @@ Skrip mengisi semua kolom untuk 35 issue dan menampilkan jumlah item yang berhas
 - [ ] 9 checkpoint dan 10 risiko masuk project sebagai draft item.
 - [ ] Item type terisi: 35 `Delivery`, 9 `Checkpoint`, 10 `Risk`.
 - [ ] Status memiliki 6 pilihan.
-- [ ] Lima tampilan dasar (Issues, Timeline, Sprints, Checkpoints, Risks) ada dan filternya benar.
+- [ ] Lima tampilan dasar (Issues, Milestones, Sprints, Checkpoints, Risks) ada; filter Issues, Checkpoints, dan Risks benar.
 - [ ] Otomatisasi aktif dan tim memahami `Closes` vs `Refs`.
 - [ ] Issue `DISC-01` sudah ditugaskan dan berstatus `Ready` untuk memulai Sprint 0.
 

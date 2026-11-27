@@ -503,11 +503,11 @@ mutation($viewId: ID!, $filter: String!) {
 '@
 
 $viewDefs = @(
-    [pscustomobject]@{ Name = "Issues"; Filter = "item-type:Delivery" },
-    [pscustomobject]@{ Name = "Timeline"; Filter = "item-type:Delivery" },
-    [pscustomobject]@{ Name = "Sprints"; Filter = "item-type:Delivery" },
-    [pscustomobject]@{ Name = "Checkpoints"; Filter = "item-type:Checkpoint" },
-    [pscustomobject]@{ Name = "Risks"; Filter = "item-type:Risk" }
+    [pscustomobject]@{ Name = "Issues"; Layout = "TABLE_LAYOUT"; Filter = "item-type:Delivery" },
+    [pscustomobject]@{ Name = "Milestones"; Layout = "ROADMAP_LAYOUT"; Filter = $null },
+    [pscustomobject]@{ Name = "Sprints"; Layout = "ROADMAP_LAYOUT"; Filter = $null },
+    [pscustomobject]@{ Name = "Checkpoints"; Layout = "TABLE_LAYOUT"; Filter = "item-type:Checkpoint" },
+    [pscustomobject]@{ Name = "Risks"; Layout = "TABLE_LAYOUT"; Filter = "item-type:Risk" }
 )
 
 foreach ($def in $viewDefs) {
@@ -518,16 +518,21 @@ foreach ($def in $viewDefs) {
         $createdView = Invoke-GraphQl -Query $createViewMutation -Variables @{
             projectId = $projectId
             name = $def.Name
-            layout = "TABLE_LAYOUT"
+            layout = $def.Layout
         }
         $viewId = $createdView.data.createProjectV2View.projectV2View.id
     }
 
-    [void](Invoke-GraphQl -Query $updateViewMutation -Variables @{
-        viewId = $viewId
-        filter = $def.Filter
-    })
-    Write-Host "    OK  tampilan $($def.Name) dengan filter $($def.Filter)" -ForegroundColor Green
+    if (-not [string]::IsNullOrWhiteSpace($def.Filter)) {
+        [void](Invoke-GraphQl -Query $updateViewMutation -Variables @{
+            viewId = $viewId
+            filter = $def.Filter
+        })
+        Write-Host "    OK  tampilan $($def.Name) dengan filter $($def.Filter)" -ForegroundColor Green
+    }
+    else {
+        Write-Host "    OK  tampilan $($def.Name) tersedia (filter tidak diubah)" -ForegroundColor Green
+    }
 }
 
 Write-Host ""
